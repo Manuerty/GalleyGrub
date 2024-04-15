@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Order implements Command{
-    private Double total;
+    private Double total = 0.0;
     private final List<Item> items = new ArrayList<>();
     public void addItem(String name, double price){
         items.add(new Item(name, price));
