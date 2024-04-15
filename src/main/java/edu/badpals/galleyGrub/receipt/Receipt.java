@@ -3,9 +3,10 @@ package edu.badpals.galleyGrub.receipt;
 import edu.badpals.galleyGrub.order.Command;
 import edu.badpals.galleyGrub.extras.Extra;
 import edu.badpals.galleyGrub.items.Item;
+
 public class Receipt implements Ticket {
-    private Double total;
-    private Extra firstExtra;
+    private Double total = 0.0;
+    private Extra firstExtra = null;
     private Command order;
 
     public Receipt(Command order){
@@ -14,34 +15,28 @@ public class Receipt implements Ticket {
     public Command getOrder(){
         return order;
     }
-
     public void setChain(Extra extra) {
-        firstExtra.setNextExtra(extra);
+        firstExtra = extra;
     }
-
     public Extra getChain(){
-        // TODO: Implement this function
-        return null;
+        return firstExtra;
     }
-
     public Double total(){
-        this.total = 0.0;
-        for (Item item : order.itemList()  ){
-            this.total += item.price();
+        if (this.total == 0d) {
+            sumExtrasCharge();
+            this.total = order.getTotal();
         }
         return this.total;
     }
-
     public void sumExtrasCharge(){
-        // TODO: Implement this function
-        ;
+        if (firstExtra != null) {
+            firstExtra.sumExtras(getOrder());
+        }
     }
-
     public void print(){
         System.out.println("Receipt");
         System.out.println("-------");
         order.display();
         System.out.println("Total: " + total());
     }
-
 }
