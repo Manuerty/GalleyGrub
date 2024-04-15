@@ -8,7 +8,7 @@ public abstract class Extra{
     static final String SAUCE = "Sauce";
     static final String LARGE = "Large";
     String extraProduct;
-    Optional<Extra> nextExtra;
+    Optional<Extra> nextExtra = Optional.ofNullable(null);
     public void setNextExtra(Extra extra) {
         nextExtra = Optional.of(extra);
     }
